@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101016">
+  <meta name="description" content="NEXT DOOR — una aventura indie pixel art donde cada puerta esconde algo.">
+  <title>NEXT DOOR — ¿Te atreves a abrir?</title>
+  <style>
+    :root{--bg:#0b0b11;--panel:#15151f;--ink:#f4f1e8;--muted:#aaa9b8;--red:#ff4655;--gold:#ffd166;--line:#343444;--green:#83f7a1}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Consolas,"Courier New",monospace;line-height:1.6}
+    a{color:inherit}
+    .scanlines:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:5;opacity:.045;background:repeating-linear-gradient(0deg,transparent 0 3px,#fff 4px)}
+    .wrap{width:min(1080px,92%);margin:auto}
+    header{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid var(--line);gap:20px}
+    .brand{font-weight:900;letter-spacing:3px;font-size:1.1rem;text-decoration:none}
+    .brand span{color:var(--red)}
+    nav{display:flex;gap:22px;font-size:.82rem;flex-wrap:wrap}
+    nav a{text-decoration:none;color:var(--muted)}nav a:hover{color:var(--gold)}
+    .hero{min-height:610px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px;padding:68px 0}
+    .eyebrow{color:var(--green);letter-spacing:3px;font-size:.76rem}
+    h1{font-size:clamp(3.2rem,9vw,7rem);line-height:.9;letter-spacing:-5px;margin:18px 0 24px;text-shadow:5px 5px 0 #5b1726}
+    h1 span{color:var(--red);display:block}
+    .intro{max-width:540px;color:var(--muted);font-size:1.03rem}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .btn{display:inline-block;padding:14px 19px;border:2px solid var(--red);background:var(--red);color:#fff;text-decoration:none;font-weight:bold;box-shadow:5px 5px 0 #6c1b2a;transition:transform .15s,box-shadow .15s}
+    .btn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 #6c1b2a}
+    .btn.secondary{background:transparent;border-color:var(--line);box-shadow:5px 5px 0 #252532;color:var(--ink)}
+    .pixel-scene{position:relative;min-height:390px;border:2px solid #393444;background:linear-gradient(#181827,#101018 70%);overflow:hidden;box-shadow:10px 10px 0 #211d2b}
+    .moon{position:absolute;right:16%;top:12%;width:60px;height:60px;background:var(--gold);box-shadow:0 0 28px #ffd16655}
+    .stars{position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:39px 43px;opacity:.35}
+    .floor{position:absolute;bottom:0;height:24%;width:100%;background:repeating-linear-gradient(90deg,#282532 0 32px,#1c1b27 32px 64px);border-top:5px solid #494050}
+    .door{position:absolute;bottom:24%;left:50%;transform:translateX(-50%);height:58%;width:35%;background:#4a2430;border:8px solid #8e4650;box-shadow:inset 0 0 0 5px #291923,0 0 35px #ff465522}
+    .door:before{content:"";position:absolute;left:12%;right:12%;top:12%;bottom:12%;border:3px solid #713743}
+    .door:after{content:"";position:absolute;right:12%;top:52%;width:9px;height:9px;background:var(--gold);box-shadow:0 0 9px var(--gold)}
+    .warning{position:absolute;bottom:7%;left:0;width:100%;text-align:center;color:#d8c6c7;font-size:.7rem;letter-spacing:2px}
+    section{padding:72px 0;border-top:1px solid var(--line)}
+    .section-tag{color:var(--red);font-size:.75rem;letter-spacing:3px}
+    h2{font-size:clamp(1.8rem,4vw,3rem);line-height:1.1;margin:10px 0 22px}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+    .card{border:1px solid var(--line);background:var(--panel);padding:22px;min-height:175px}
+    .card .icon{font-size:1.8rem;color:var(--gold)}
+    .card h3{margin:12px 0 6px;font-size:1rem}
+    .card p{margin:0;color:var(--muted);font-size:.9rem}
+    .quote{font-size:clamp(1.2rem,3vw,2rem);max-width:760px;border-left:4px solid var(--red);padding:6px 0 6px 24px}
+    .download-panel{display:flex;align-items:center;justify-content:space-between;gap:28px;border:1px solid var(--line);background:linear-gradient(120deg,#191620,#101018);padding:30px}
+    .download-panel p{color:var(--muted);max-width:560px}
+    .notice{font-size:.78rem;color:var(--green);margin-top:14px}
+    footer{padding:28px 0 42px;color:var(--muted);font-size:.78rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .pixel-heart{color:var(--red)}
+    @media(max-width:760px){nav{gap:12px;font-size:.72rem}.hero{grid-template-columns:1fr;padding:48px 0}.pixel-scene{min-height:330px}.features{grid-template-columns:1fr}.download-panel{display:block}.download-panel .btn{margin-top:10px}h1{letter-spacing:-3px}}
+  </style>
+</head>
+<body class="scanlines">
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#top">NEXT<span>_</span>DOOR</a>
+      <nav aria-label="Navegación">
+        <a href="#about">EL JUEGO</a>
+        <a href="#features">CARACTERÍSTICAS</a>
+        <a href="#download">DESCARGA</a>
+      </nav>
+    </header>
+    <main id="top">
+      <div class="hero">
+        <div>
+          <div class="eyebrow">◆ UN JUEGO EPICO</div>
+          <h1>NEXT <span>DOOR</span></h1>
+          <p class="intro">Cada sala o etapa es un misterio. Encuentra monedas, consigue llaves y descubre qué te espera al otro lado. ¿Vas a abrir la siguiente puerta?</p>
+          <div class="actions">
+            <a class="btn" href="#download">▶ JUGAR / DESCARGAR</a>
+            <a class="btn secondary" href="#about">EXPLORAR</a>
+            <a class="btn secondary" href="https://github.com/gabrirayitoxd/lolidkxd2.0/raw/refs/heads/main/index.html" target="_blank" rel="noopener noreferrer">Juega Next Door en celular!</a>
+          </div>
+        </div>
+        <div class="pixel-scene" role="img" aria-label="Una puerta misteriosa en una habitación oscura de pixel art">
+          <div class="stars"></div><div class="moon"></div><div class="door"></div><div class="floor"></div>
+          <div class="warning">NO TODAS LAS PUERTAS DEBERÍAN ABRIRSE</div>
+        </div>
+      </div>
+
+      <section id="about">
+        <div class="section-tag">01 / EL JUEGO</div>
+        <h2>Un paso más.<br>Una puerta más.</h2>
+        <p class="intro">NEXT DOOR es un juego 2D bastante divertido y simple de jugar. Trata de conseguir todas las monedas que puedas, nunca sabes si las necesitaras.</p>
+        <p class="quote">“La salida está justo delante de ti. La pregunta es qué cuantas veces lo intentaras.”</p>
+      </section>
+
+      <section id="features">
+        <div class="section-tag">02 / QUÉ TE ESPERA</div>
+        <h2>Explora. Consigue. Sobrevive.</h2>
+        <div class="features">
+          <article class="card"><div class="icon">▣</div><h3>Salas misteriosas</h3><p>Avanza etapa por etapa y descubre lo que esconde cada habitación.</p></article>
+          <article class="card"><div class="icon">◇</div><h3>Monedas y llaves</h3><p>Recoge objetos, administra tus recursos y encuentra la llave de salida.</p></article>
+          <article class="card"><div class="icon">▤</div><h3>Tiendas y mejoras</h3><p>Prepárate para el siguiente tramo y decide cuándo y como gastar tus monedas.</p></article>
+        </div>
+      </section>
+
+      <section id="download">
+        <div class="section-tag">03 / TU AVENTURA EMPIEZA AQUÍ</div>
+        <div class="download-panel">
+          <div>
+            <h2>¿Listo para entrar?</h2>
+            <p>Pulsa el botón para abrir la descarga de NEXT DOOR en MediaFire. ¡Nos vemos al otro lado!</p>
+            <div class="notice">DESCARGA DISPONIBLE · ARCHIVO ZIP</div>
+          </div>
+          <a class="btn" href="https://www.mediafire.com/file/6ong5au0vr8bqmr/Next_DOOR.zip/file" target="_blank" rel="noopener noreferrer" id="downloadBtn">DESCARGAR NEXT DOOR</a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <span>© <span id="year"></span> NEXT DOOR · Proyecto indie</span>
+      <span>Hecho con <span class="pixel-heart">♥</span> y píxeles.</span>
+    </footer>
+  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
