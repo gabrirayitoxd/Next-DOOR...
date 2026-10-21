@@ -4,15 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101016">
-  <meta name="description" content="NEXT DOOR — una aventura indie pixel art donde cada puerta esconde algo.">
+  <meta name="description" content="NEXT DOOR — una aventura 2D indie llena de puertas, monedas, llaves y niveles que desearías no encontrar.">
   <title>NEXT DOOR — ¿Te atreves a abrir?</title>
   <style>
-    :root{--bg:#0b0b11;--panel:#15151f;--ink:#f4f1e8;--muted:#aaa9b8;--red:#ff4655;--gold:#ffd166;--line:#343444;--green:#83f7a1}
+    :root{--bg:#0b0b11;--panel:#15151f;--ink:#f4f1e8;--muted:#c0bdcc;--red:#ff4655;--gold:#ffd166;--line:#343444;--green:#83f7a1}
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:Consolas,"Courier New",monospace;line-height:1.6}
+    body{margin:0;background:radial-gradient(ellipse at 50% 0%,#211624 0%,var(--bg) 55%);color:var(--ink);font-family:"Comic Sans MS","Comic Neue",cursive;font-style:normal;line-height:1.7}
+    body *{font-family:"Comic Sans MS","Comic Neue",cursive;font-style:normal}
     a{color:inherit}
-    .scanlines:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:5;opacity:.045;background:repeating-linear-gradient(0deg,transparent 0 3px,#fff 4px)}
+    .scanlines:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:5;opacity:.025;background:repeating-linear-gradient(0deg,transparent 0 3px,#fff 4px)}
     .wrap{width:min(1080px,92%);margin:auto}
     header{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid var(--line);gap:20px}
     .brand{font-weight:900;letter-spacing:3px;font-size:1.1rem;text-decoration:none}
@@ -20,37 +21,43 @@
     nav{display:flex;gap:22px;font-size:.82rem;flex-wrap:wrap}
     nav a{text-decoration:none;color:var(--muted)}nav a:hover{color:var(--gold)}
     .hero{min-height:610px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px;padding:68px 0}
-    .eyebrow{color:var(--green);letter-spacing:3px;font-size:.76rem}
+    .eyebrow{color:var(--green);letter-spacing:3px;font-size:.9rem;font-weight:bold}
     h1{font-size:clamp(3.2rem,9vw,7rem);line-height:.9;letter-spacing:-5px;margin:18px 0 24px;text-shadow:5px 5px 0 #5b1726}
     h1 span{color:var(--red);display:block}
-    .intro{max-width:540px;color:var(--muted);font-size:1.03rem}
+    .intro{max-width:540px;color:var(--muted);font-size:1.12rem}
     .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-    .btn{display:inline-block;padding:14px 19px;border:2px solid var(--red);background:var(--red);color:#fff;text-decoration:none;font-weight:bold;box-shadow:5px 5px 0 #6c1b2a;transition:transform .15s,box-shadow .15s}
+    .btn{display:inline-block;padding:13px 19px;border:2px solid var(--red);border-radius:9px;background:var(--red);color:#fff;text-decoration:none;font-weight:bold;box-shadow:5px 5px 0 #6c1b2a;transition:transform .15s,box-shadow .15s}
     .btn:hover{transform:translate(2px,2px);box-shadow:3px 3px 0 #6c1b2a}
+    .btn.mobile{border-color:#7460c7;background:#6c54bc;box-shadow:4px 4px 0 #382c6a}
     .btn.secondary{background:transparent;border-color:var(--line);box-shadow:5px 5px 0 #252532;color:var(--ink)}
-    .pixel-scene{position:relative;min-height:390px;border:2px solid #393444;background:linear-gradient(#181827,#101018 70%);overflow:hidden;box-shadow:10px 10px 0 #211d2b}
-    .moon{position:absolute;right:16%;top:12%;width:60px;height:60px;background:var(--gold);box-shadow:0 0 28px #ffd16655}
+    .pixel-scene{position:relative;min-height:390px;border:2px solid #393444;border-radius:12px;background:linear-gradient(#181827,#101018 70%);overflow:hidden;box-shadow:10px 10px 0 #211d2b}
+    .moon{position:absolute;right:16%;top:12%;width:60px;height:60px;border-radius:50%;background:var(--gold);animation:moonPulse 4s ease-in-out infinite;box-shadow:0 0 28px #ffd16655}
     .stars{position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:39px 43px;opacity:.35}
     .floor{position:absolute;bottom:0;height:24%;width:100%;background:repeating-linear-gradient(90deg,#282532 0 32px,#1c1b27 32px 64px);border-top:5px solid #494050}
-    .door{position:absolute;bottom:24%;left:50%;transform:translateX(-50%);height:58%;width:35%;background:#4a2430;border:8px solid #8e4650;box-shadow:inset 0 0 0 5px #291923,0 0 35px #ff465522}
+    .door{position:absolute;bottom:24%;left:50%;transform:translateX(-50%);height:58%;width:35%;background:linear-gradient(90deg,#3b1c29,#592a38,#3b1c29);border:8px solid #8e4650;box-shadow:inset 0 0 0 5px #291923,0 0 35px #ff465522;animation:doorGlow 5s ease-in-out infinite}
     .door:before{content:"";position:absolute;left:12%;right:12%;top:12%;bottom:12%;border:3px solid #713743}
     .door:after{content:"";position:absolute;right:12%;top:52%;width:9px;height:9px;background:var(--gold);box-shadow:0 0 9px var(--gold)}
-    .warning{position:absolute;bottom:7%;left:0;width:100%;text-align:center;color:#d8c6c7;font-size:.7rem;letter-spacing:2px}
+    .warning{position:absolute;bottom:7%;left:0;width:100%;text-align:center;color:#d8c6c7;font-size:.8rem;letter-spacing:1px;padding:0 8px}
     section{padding:72px 0;border-top:1px solid var(--line)}
     .section-tag{color:var(--red);font-size:.75rem;letter-spacing:3px}
     h2{font-size:clamp(1.8rem,4vw,3rem);line-height:1.1;margin:10px 0 22px}
     .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
-    .card{border:1px solid var(--line);background:var(--panel);padding:22px;min-height:175px}
+    .card{border:1px solid var(--line);border-radius:12px;background:linear-gradient(145deg,#191923,var(--panel));padding:22px;min-height:190px;transition:transform .2s,border-color .2s}
+    .card:hover{transform:translateY(-4px);border-color:#68566f}
     .card .icon{font-size:1.8rem;color:var(--gold)}
     .card h3{margin:12px 0 6px;font-size:1rem}
-    .card p{margin:0;color:var(--muted);font-size:.9rem}
+    .card p{margin:0;color:var(--muted);font-size:1rem}
     .quote{font-size:clamp(1.2rem,3vw,2rem);max-width:760px;border-left:4px solid var(--red);padding:6px 0 6px 24px}
     .download-panel{display:flex;align-items:center;justify-content:space-between;gap:28px;border:1px solid var(--line);background:linear-gradient(120deg,#191620,#101018);padding:30px}
     .download-panel p{color:var(--muted);max-width:560px}
-    .notice{font-size:.78rem;color:var(--green);margin-top:14px}
+    .notice{font-size:.9rem;color:var(--green);margin-top:14px}
     footer{padding:28px 0 42px;color:var(--muted);font-size:.78rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     .pixel-heart{color:var(--red)}
-    @media(max-width:760px){nav{gap:12px;font-size:.72rem}.hero{grid-template-columns:1fr;padding:48px 0}.pixel-scene{min-height:330px}.features{grid-template-columns:1fr}.download-panel{display:block}.download-panel .btn{margin-top:10px}h1{letter-spacing:-3px}}
+    .small-note{font-size:.94rem;color:#aaa6b7;margin-top:18px}
+    @keyframes moonPulse{0%,100%{box-shadow:0 0 22px #ffd16644}50%{box-shadow:0 0 38px #ffd16688}}
+    @keyframes doorGlow{0%,100%{box-shadow:inset 0 0 0 5px #291923,0 0 22px #ff465511}50%{box-shadow:inset 0 0 0 5px #291923,0 0 38px #ff465533}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+    @media(max-width:760px){nav{gap:12px;font-size:.85rem}.hero{grid-template-columns:1fr;padding:48px 0}.pixel-scene{min-height:330px}.features{grid-template-columns:1fr}.download-panel{display:block}.download-panel .actions .btn{margin-top:10px}h1{letter-spacing:-2px}header{align-items:flex-start;flex-direction:column}.actions .btn{width:100%;text-align:center}}
   </style>
 </head>
 <body class="scanlines">
@@ -66,35 +73,36 @@
     <main id="top">
       <div class="hero">
         <div>
-          <div class="eyebrow">◆ UN JUEGO EPICO</div>
+          <div class="eyebrow">◆ UNA AVENTURA HECHA CON GANAS</div>
           <h1>NEXT <span>DOOR</span></h1>
-          <p class="intro">Cada sala o etapa es un misterio. Encuentra monedas, consigue llaves y descubre qué te espera al otro lado. ¿Vas a abrir la siguiente puerta?</p>
+          <p class="intro">Una puerta, una llave y un montón de salas que no siempre juegan limpio. Reúne monedas, busca la salida y no bajes la guardia: nunca sabes qué puede estar esperándote al otro lado.</p>
+          <p class="small-note">Un juego indie creado con cariño. Gracias por probarlo y ayudar a que siga creciendo.</p>
           <div class="actions">
             <a class="btn" href="#download">▶ JUGAR / DESCARGAR</a>
-            <a class="btn secondary" href="#about">EXPLORAR</a>
-            <a class="btn secondary" href="https://github.com/gabrirayitoxd/lolidkxd2.0/raw/refs/heads/main/index.html" target="_blank" rel="noopener noreferrer">Juega Next Door en celular!</a>
+            <a class="btn secondary" href="#about">CONOCE EL JUEGO</a>
+            <a class="btn mobile" href="#about">Juega Next Door en celular</a>
           </div>
         </div>
-        <div class="pixel-scene" role="img" aria-label="Una puerta misteriosa en una habitación oscura de pixel art">
+        <div class="pixel-scene" role="img" aria-label="Una puerta misteriosa iluminada por la luna en una habitación oscura">
           <div class="stars"></div><div class="moon"></div><div class="door"></div><div class="floor"></div>
-          <div class="warning">NO TODAS LAS PUERTAS DEBERÍAN ABRIRSE</div>
+          <div class="warning">NO TODAS LAS ETAPAS/SALAS SON FACILES...</div>
         </div>
       </div>
 
       <section id="about">
-        <div class="section-tag">01 / EL JUEGO</div>
+        <div class="section-tag">01 / DE QUÉ VA TODO ESTO</div>
         <h2>Un paso más.<br>Una puerta más.</h2>
-        <p class="intro">NEXT DOOR es un juego 2D bastante divertido y simple de jugar. Trata de conseguir todas las monedas que puedas, nunca sabes si las necesitaras.</p>
-        <p class="quote">“La salida está justo delante de ti. La pregunta es qué cuantas veces lo intentaras.”</p>
+        <p class="intro">NEXT DOOR es una aventura 2D en la que cada sala te pone una pequeña prueba. Junta monedas, encuentra la llave y llega a la puerta de salida. A veces tendrás un respiro; otras veces, vas a querer correr.</p>
+        <p class="quote">“La salida está justo delante de ti. Solo queda descubrir qué movimientos hay que hacer para llegar.”</p>
       </section>
 
       <section id="features">
-        <div class="section-tag">02 / QUÉ TE ESPERA</div>
+        <div class="section-tag">/ COSAS QUE TE PUEDES ENCONTRAR</div>
         <h2>Explora. Consigue. Sobrevive.</h2>
         <div class="features">
           <article class="card"><div class="icon">▣</div><h3>Salas misteriosas</h3><p>Avanza etapa por etapa y descubre lo que esconde cada habitación.</p></article>
-          <article class="card"><div class="icon">◇</div><h3>Monedas y llaves</h3><p>Recoge objetos, administra tus recursos y encuentra la llave de salida.</p></article>
-          <article class="card"><div class="icon">▤</div><h3>Tiendas y mejoras</h3><p>Prepárate para el siguiente tramo y decide cuándo y como gastar tus monedas.</p></article>
+          <article class="card"><div class="icon">◇</div><h3>Monedas y llaves</h3><p>Recoge monedas, encuentra la llave y decide cuándo vale la pena arriesgarte por un extra.</p></article>
+          <article class="card"><div class="icon">▤</div><h3>Tiendas y mejoras</h3><p>Cuando toque descansar, visita la tienda y prepárate para lo que venga después.</p></article>
         </div>
       </section>
 
@@ -102,17 +110,20 @@
         <div class="section-tag">03 / TU AVENTURA EMPIEZA AQUÍ</div>
         <div class="download-panel">
           <div>
-            <h2>¿Listo para entrar?</h2>
-            <p>Pulsa el botón para abrir la descarga de NEXT DOOR en MediaFire. ¡Nos vemos al otro lado!</p>
+            <h2>¿Te animas a jugar?</h2>
+            <p>Descarga NEXT DOOR, abre el juego y empieza a explorar. Si te gusta, compártelo con tus amigos: cada jugador nuevo ayuda a que este pequeño proyecto llegue más lejos.</p>
             <div class="notice">DESCARGA DISPONIBLE · ARCHIVO ZIP</div>
           </div>
-          <a class="btn" href="https://www.mediafire.com/file/6ong5au0vr8bqmr/Next_DOOR.zip/file" target="_blank" rel="noopener noreferrer" id="downloadBtn">DESCARGAR NEXT DOOR</a>
+          <div class="actions">
+            <a class="btn" href="https://www.mediafire.com/file/lwhszthvc20jpqv/Next+DOOR.zip/file" target="_blank" rel="noopener noreferrer" id="downloadBtn">DESCARGAR NEXT DOOR</a>
+            <a class="btn secondary" href="https://www.mediafire.com/file/vw7oirciyp4i4p2/NextDoorPort.html/file" target="_blank" rel="noopener noreferrer" id="downloadBtn">DESCARGAR MOBILE</a>
+          </div>
         </div>
       </section>
     </main>
     <footer>
       <span>© <span id="year"></span> NEXT DOOR · Proyecto indie</span>
-      <span>Hecho con <span class="pixel-heart">♥</span> y píxeles.</span>
+      <span>Hecho con <span class="pixel-heart">♥</span>, código y muchas ganas.</span>
     </footer>
   </div>
   <script>
