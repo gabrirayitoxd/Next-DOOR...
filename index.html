@@ -19,7 +19,8 @@
     .brand{font-weight:900;letter-spacing:3px;font-size:1.1rem;text-decoration:none}
     .brand span{color:var(--red)}
     nav{display:flex;gap:22px;font-size:.82rem;flex-wrap:wrap}
-    nav a{text-decoration:none;color:var(--muted)}nav a:hover{color:var(--gold)}
+    nav a{text-decoration:none;color:var(--muted)}
+    nav a:hover{color:var(--gold)}
     .hero{min-height:610px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px;padding:68px 0}
     .eyebrow{color:var(--green);letter-spacing:3px;font-size:.9rem;font-weight:bold}
     h1{font-size:clamp(3.2rem,9vw,7rem);line-height:.9;letter-spacing:-5px;margin:18px 0 24px;text-shadow:5px 5px 0 #5b1726}
@@ -54,10 +55,11 @@
     footer{padding:28px 0 42px;color:var(--muted);font-size:.78rem;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     .pixel-heart{color:var(--red)}
     .small-note{font-size:.94rem;color:#aaa6b7;margin-top:18px}
+
     @keyframes moonPulse{0%,100%{box-shadow:0 0 22px #ffd16644}50%{box-shadow:0 0 38px #ffd16688}}
     @keyframes doorGlow{0%,100%{box-shadow:inset 0 0 0 5px #291923,0 0 22px #ff465511}50%{box-shadow:inset 0 0 0 5px #291923,0 0 38px #ff465533}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
-    @media(max-width:760px){nav{gap:12px;font-size:.85rem}.hero{grid-template-columns:1fr;padding:48px 0}.pixel-scene{min-height:330px}.features{grid-template-columns:1fr}.download-panel{display:block}.download-panel .actions .btn{margin-top:10px}h1{letter-spacing:-2px}header{align-items:flex-start;flex-direction:column}.actions .btn{width:100%;text-align:center}}
+    @media(max-width:760px){nav{gap:12px;font-size:.85rem}.hero{grid-template-columns:1fr;padding:48px 0}.pixel-scene{min-height:330px}.features{grid-template-columns:1fr}.download-panel{display:block}.download-panel .btn{margin-top:10px}h1{letter-spacing:-2px}header{align-items:flex-start;flex-direction:column}.actions .btn{width:100%;text-align:center}}
   </style>
 </head>
 <body class="scanlines">
@@ -68,8 +70,9 @@
         <a href="#about">EL JUEGO</a>
         <a href="#features">CARACTERÍSTICAS</a>
         <a href="#download">DESCARGA</a>
-      </nav>
+    </nav>
     </header>
+
     <main id="top">
       <div class="hero">
         <div>
@@ -83,11 +86,13 @@
             <a class="btn mobile" href="#about">Juega Next Door en celular</a>
           </div>
         </div>
+
         <div class="pixel-scene" role="img" aria-label="Una puerta misteriosa iluminada por la luna en una habitación oscura">
           <div class="stars"></div><div class="moon"></div><div class="door"></div><div class="floor"></div>
           <div class="warning">NO TODAS LAS ETAPAS/SALAS SON FACILES...</div>
         </div>
       </div>
+
 
       <section id="about">
         <div class="section-tag">01 / DE QUÉ VA TODO ESTO</div>
@@ -110,22 +115,23 @@
         <div class="section-tag">03 / TU AVENTURA EMPIEZA AQUÍ</div>
         <div class="download-panel">
           <div>
-            <h2>¿Te animas a jugar?</h2>
-            <p>Descarga NEXT DOOR, abre el juego y empieza a explorar. Si te gusta, compártelo con tus amigos: cada jugador nuevo ayuda a que este pequeño proyecto llegue más lejos.</p>
-            <div class="notice">DESCARGA DISPONIBLE · ARCHIVO ZIP</div>
+            <h2>¡NEXT DOOR DISPONIBLE EN WEB!</h2>
+            <p>Juega NEXT DOOR directamente en tu navegador, sin descargar ni instalar archivos. Entra, reúne monedas, encuentra la llave y llega a la siguiente puerta. Si te gusta, compártelo con tus amigos.</p>
+            <div class="notice">JUEGO DISPONIBLE ONLINE · SIN DESCARGAS</div>
           </div>
           <div class="actions">
-            <a class="btn" href="https://www.mediafire.com/file/lwhszthvc20jpqv/Next+DOOR.zip/file" target="_blank" rel="noopener noreferrer" id="downloadBtn">DESCARGAR NEXT DOOR</a>
-            <a class="btn secondary" href="https://www.mediafire.com/file/vw7oirciyp4i4p2/NextDoorPort.html/file" target="_blank" rel="noopener noreferrer" id="downloadBtn">DESCARGAR MOBILE</a>
+            <a class="btn" href="https://gabrirayitoxd.github.io/NextDoorGame/" target="_blank" rel="noopener noreferrer">▶ JUGAR EN WEB</a>
           </div>
         </div>
       </section>
     </main>
+
     <footer>
       <span>© <span id="year"></span> NEXT DOOR · Proyecto indie</span>
       <span>Hecho con <span class="pixel-heart">♥</span>, código y muchas ganas.</span>
     </footer>
   </div>
+
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
